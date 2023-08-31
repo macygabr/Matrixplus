@@ -22,7 +22,9 @@ S21Matrix::S21Matrix(const S21Matrix& other) {
 S21Matrix::S21Matrix(S21Matrix&& other) {
   S21CalocMatrix(*this, other.rows_, other.cols_);
   matrix_ = other.matrix_;
-  other.matrix_ = nullptr;
+  // for (int i = 0; i < rows_; i++) delete[] other.matrix_[i];
+  // delete[] other.matrix_;
+  // other.matrix_ = nullptr;
 }
 
 S21Matrix::~S21Matrix() {
@@ -125,7 +127,9 @@ S21Matrix S21Matrix::InverseMatrix() {
 
 //__________________________________________________________________________________
 int S21Matrix::getCols() const { return cols_; }
+
 int S21Matrix::getRows() const { return rows_; }
+
 int S21Matrix::setSize(int x, int y) {
   if (x <= 0 || y <= 0) {
     throw std::invalid_argument("Invalid argument different matrix dimensions");
@@ -134,6 +138,7 @@ int S21Matrix::setSize(int x, int y) {
   S21CalocMatrix(*this, x, y);
   cols_ = x;
   rows_ = y;
+
   return 0;
 }
 

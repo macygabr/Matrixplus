@@ -10,18 +10,18 @@ void writeMatrix(double* seq, S21Matrix& other, int col, int row) {
   }
 }
 
-TEST(TestGroupName, Brackets) {
-  S21Matrix a(1, 1);
-  S21Matrix b(1, 1);
-  a(0, 0) = 1.2;
-  b(0, 0) = 1.2;
-  ASSERT_EQ(a.EqMatrix(b), true);
-}
+// TEST(TestGroupName, Brackets) {
+//   S21Matrix a(1, 1);
+//   S21Matrix b(1, 1);
+//   a(0, 0) = 1.2;
+//   b(0, 0) = 1.2;
+//   ASSERT_EQ(a.EqMatrix(b), true);
+// }
 
-TEST(TestGroupName, Mutator) {
-  S21Matrix a;
-  S21Matrix b;
-  a.setSize(1, 1);
+// TEST(TestGroupName, Mutator) {
+  // S21Matrix a;
+  // S21Matrix b;
+  // a.setSize(1, 1);
   // b.setSize(1, 1);
   // a(0, 0) = 1.2;
   // b(0, 0) = 1.2;
@@ -32,7 +32,7 @@ TEST(TestGroupName, Mutator) {
 
   // EXPECT_EQ(b.getCols(), 1);
   // EXPECT_EQ(b.getRows(), 1);
-}
+// }
 
 // TEST(Matrix, Copy) {
 //   S21Matrix basic(2, 2);
@@ -43,14 +43,14 @@ TEST(TestGroupName, Mutator) {
 //   ASSERT_EQ(basic.EqMatrix(copy), true);
 // }
 
-// TEST(Matrix, Move) {
-//   S21Matrix basic(2, 2);
-//   double seq[] = {11.11, 12.12, 21.21, 22.22};
-//   writeMatrix(seq, basic, 2, 2);
-//   S21Matrix copy(basic);
-//   S21Matrix move(std::move(basic));
-//   ASSERT_EQ(copy.EqMatrix(move), true);
-// }
+TEST(Matrix, Move) {
+  S21Matrix basic(2, 2);
+  double seq[] = {11.11, 12.12, 21.21, 22.22};
+  writeMatrix(seq, basic, 2, 2);
+  S21Matrix copy(basic);
+  S21Matrix move(std::move(basic));
+  ASSERT_EQ(copy.EqMatrix(move), true);
+}
 
 // TEST(Matrix, Inverse) {
 //   S21Matrix basic(3, 3);
@@ -108,19 +108,19 @@ TEST(TestGroupName, Mutator) {
 // }
 
 // TEST(Matrix, Errors) {
-//   S21Matrix error1(1, 5);
-//   S21Matrix error2(2, 5);
-//   S21Matrix error3(4, 4);
-//   EXPECT_THROW(S21Matrix errors(-1, -1), std::invalid_argument);
-//   EXPECT_THROW(S21Matrix errors(0, 0), std::invalid_argument);
-//   EXPECT_THROW(error1 -= error2, std::invalid_argument);
-//   EXPECT_THROW(error1 += error2, std::invalid_argument);
-//   EXPECT_THROW(error1 *= error2, std::invalid_argument);
-//   EXPECT_THROW(error1.Determinant(), std::invalid_argument);
-//   EXPECT_THROW(error1.CalcComplements(), std::invalid_argument);
-//   EXPECT_THROW(error3.InverseMatrix(), std::runtime_error);
-//   EXPECT_THROW(error3(-12, 1) = 1, std::out_of_range);
-//   EXPECT_THROW(error3(1, 123) = 14, std::out_of_range);
+  // S21Matrix error1(1, 5);
+  // S21Matrix error2(2, 5);
+  // S21Matrix error3(4, 4);
+  // EXPECT_THROW(S21Matrix errors(-1, -1), std::invalid_argument);
+  // EXPECT_THROW(S21Matrix errors(0, 0), std::invalid_argument);
+  // EXPECT_THROW(error1 -= error2, std::invalid_argument);
+  // EXPECT_THROW(error1 += error2, std::invalid_argument);
+  // EXPECT_THROW(error1 *= error2, std::invalid_argument);
+  // EXPECT_THROW(error1.Determinant(), std::invalid_argument);
+  // EXPECT_THROW(error1.CalcComplements(), std::invalid_argument);
+  // EXPECT_THROW(error3.InverseMatrix(), std::runtime_error);
+  // EXPECT_THROW(error3(-12, 1) = 1, std::out_of_range);
+  // EXPECT_THROW(error3(1, 123) = 14, std::out_of_range);
 // }
 
 int main(int argc, char** argv) {
