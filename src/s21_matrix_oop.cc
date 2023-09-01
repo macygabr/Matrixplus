@@ -25,17 +25,15 @@ S21Matrix::S21Matrix(S21Matrix&& other) {
   other.matrix_ = nullptr;
 }
 
-S21Matrix::~S21Matrix() {
-  clean(*this);
-}
+S21Matrix::~S21Matrix() { clean(*this); }
 
-void S21Matrix::clean(S21Matrix& other){
-    if (other.matrix_) {
-        for (int i = 0; i < other.rows_; i++) delete[] other.matrix_[i];
-        delete[] other.matrix_;
-        other.rows_ = 0;
-        other.cols_ = 0;
-      }
+void S21Matrix::clean(S21Matrix& other) {
+  if (other.matrix_) {
+    for (int i = 0; i < other.rows_; i++) delete[] other.matrix_[i];
+    delete[] other.matrix_;
+    other.rows_ = 0;
+    other.cols_ = 0;
+  }
 }
 
 double S21Matrix::Determinant() {
@@ -142,9 +140,9 @@ int S21Matrix::setSize(int x, int y) {
     throw std::invalid_argument("Invalid argument different matrix dimensions");
   if (x == rows_ && y == cols_) return 0;
 
-  S21Matrix copy(x,y);
-  for (int i = 0; i < rows_ && i< x; i++)
-    for (int j = 0; j < cols_ && j< y; j++) copy.matrix_[i][j] = matrix_[i][j];
+  S21Matrix copy(x, y);
+  for (int i = 0; i < rows_ && i < x; i++)
+    for (int j = 0; j < cols_ && j < y; j++) copy.matrix_[i][j] = matrix_[i][j];
 
   *this = copy;
 
@@ -259,28 +257,17 @@ S21Matrix S21Matrix::operator-(const S21Matrix& other) {
 }
 bool S21Matrix::operator==(const S21Matrix& other) { return EqMatrix(other); }
 
-
 S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
-  if(*this == other) return *this;
+  if (*this == other) return *this;
   clean(*this);
-  S21CalocMatrix(*this,other.rows_, other.cols_);
+  S21CalocMatrix(*this, other.rows_, other.cols_);
   for (int i = 0; i < rows_; i++) {
     for (int j = 0; j < cols_; j++) {
       matrix_[i][j] = other.matrix_[i][j];
     }
   }
-  return *this ;
+  return *this;
 }
-
-// S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
-//   S21Matrix a(other.rows_, other.cols_);
-//   for (int i = 0; i < rows_; i++) {
-//     for (int j = 0; j < cols_; j++) {
-//       a.matrix_[i][j] = other.matrix_[i][j];
-//     }
-//   }
-//   return *this ;
-// }
 
 S21Matrix S21Matrix::operator+=(const S21Matrix& other) {
   SumMatrix(other);

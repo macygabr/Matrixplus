@@ -14,8 +14,8 @@ class S21Matrix {
   void S21CalocMatrix(S21Matrix& other, int rows,
                       int cols); /**< Выделение памяти*/
   void S21GetMatrix(); /**< Приведение матрицы к треугольному виду*/
-    S21Matrix MatrixMinor(int rows, int cols);
-    void clean(S21Matrix& other);
+  S21Matrix MatrixMinor(int rows, int cols);
+  void clean(S21Matrix& other);
 
  public:
   // Accessor and Mutator:
