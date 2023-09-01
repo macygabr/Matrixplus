@@ -8,6 +8,7 @@ OS := $(shell uname -s)
 ifeq ($(OS), Linux)
 	TEST_FLAGS += -lsubunit -lrt -lm
 	DOX = echo 'you must install doxygen'
+	VAL = echo 'you must install doxygen'
 else
 	DOX =brew install doxygen
 endif
@@ -16,6 +17,10 @@ all: test
 
 installDox:
 	$(DOX)
+
+installVal:
+	sudo apt-get install libgtest-dev libgmock-dev -y
+	sudo apt install g++ -y
 
 dvi: clean
 	doxygen Doxyfile
@@ -39,12 +44,13 @@ test: clean s21_matrix_oop.a
 	$(CC) $(TEST_FUNC) s21_matrix_oop.a -o test $(TEST_FLAGS)
 	./test
 
-valgrind: clean check s21_matrix_oop.a test
+valgrind: clean test
 	CK_FORK=no valgrind --tool=memcheck --leak-check=yes --track-origins=yes  -s ./test
 
 check_cppcheck:
 	cppcheck --enable=all --suppress=missingIncludeSystem --inconclusive --check-config $(FILES) *.h
 
-leaks: test 
+leaks: clean s21_matrix_oop.a
+	$(CC) $(TEST_FUNC) s21_matrix_oop.a -o test $(TEST_FLAGS)
 	leaks -atExit -- ./test
 .PHONY: installDox dvi clean s21_matrix_oop.a clang goclang test valgrind check_cppcheck
